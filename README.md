@@ -2,7 +2,7 @@
 
 This project is include the followings;
 1. Basic player movement and camera control
-2. Hold & Move & Rotate objects
+2. Hold & Move & Rotate & Throw objects
 3. Place in a grid
 4. Place with free control
 5. Inventory system
