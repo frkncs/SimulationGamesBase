@@ -20,8 +20,9 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	private LayerMask _movableLayer;
 
 	private Dictionary<int, Outline> _cachedOutlineComponents; //instanceId, outlineComponent
-	private Transform _currentlyLookingObjectTrans;
-	private Rigidbody _currentlyLookingObjectRb;
+	private MovableItemBase _currentlyLookingMovable;
+	private Transform _currentlyLookingMovableTrans;
+	private Rigidbody _currentlyLookingMovableRb;
 	private int _lastHighligtedObjectInstanceId = -1;
 	private bool _isHoldingObject;
 
@@ -45,7 +46,7 @@ public class ClickHoldAndRotateController : MonoBehaviour
 
 	private void PickupAndMove()
 	{
-		if (_currentlyLookingObjectTrans != null)
+		if (_currentlyLookingMovableTrans != null)
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
@@ -58,9 +59,33 @@ public class ClickHoldAndRotateController : MonoBehaviour
 		}
 	}
 
+	private Tween _rotateObjectTween;
+	
+	private void RotateMovable()
+	{
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			if (_rotateObjectTween != null)
+			{
+				_rotateObjectTween.Kill();
+			}
+			
+			if (Input.GetKey(KeyCode.LeftShift))
+			{
+				_currentlyLookingMovable.RotationValue += 45;
+			}
+			else
+			{
+				_currentlyLookingMovable.RotationValue += 90;
+			}
+			
+			_rotateObjectTween = _currentlyLookingMovableTrans.DORotate(new Vector3(0, _currentlyLookingMovable.RotationValue, 0), 0.15f);
+		}
+	}
+
 	private void FixedUpdate()
 	{
-		if (_currentlyLookingObjectTrans != null)
+		if (_currentlyLookingMovableTrans != null)
 		{
 			if (Input.GetMouseButton(0))
 			{
@@ -73,10 +98,10 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		Vector3 forwardHoldObjectPos = transform.position + (_mainCam.transform.forward * zOffsetForHoldObject) + (Vector3.up * yOffsetForHoldObject);
 		
-		if ((forwardHoldObjectPos - _currentlyLookingObjectTrans.position).sqrMagnitude >= .01f)
+		if ((forwardHoldObjectPos - _currentlyLookingMovableTrans.position).sqrMagnitude >= .01f)
 		{
-			Vector3 moveDir = forwardHoldObjectPos - _currentlyLookingObjectTrans.position;
-			_currentlyLookingObjectRb.AddForce(moveDir * pickUpForce);
+			Vector3 moveDir = forwardHoldObjectPos - _currentlyLookingMovableTrans.position;
+			_currentlyLookingMovableRb.AddForce(moveDir * pickUpForce);
 		}
 	}
 	
@@ -84,22 +109,22 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		_isHoldingObject = true;
 		
-		_currentlyLookingObjectRb.useGravity = false;
-		_currentlyLookingObjectRb.drag = 10;
-		_currentlyLookingObjectRb.constraints = RigidbodyConstraints.FreezeRotation;
+		_currentlyLookingMovableRb.useGravity = false;
+		_currentlyLookingMovableRb.drag = 10;
+		_currentlyLookingMovableRb.constraints = RigidbodyConstraints.FreezeRotation;
 
-		_currentlyLookingObjectTrans.DORotate(new Vector3(0, 0, 0), .2f, RotateMode.Fast);	
+		_currentlyLookingMovableTrans.DORotate(new Vector3(0, _currentlyLookingMovable.RotationValue, 0), .2f, RotateMode.Fast);
 	}
 	
 	private void DropMovable()
 	{
 		_isHoldingObject = false;
 		
-		_currentlyLookingObjectRb.useGravity = true;
-		_currentlyLookingObjectRb.drag = 1;
-		_currentlyLookingObjectRb.constraints = RigidbodyConstraints.None;
+		_currentlyLookingMovableRb.useGravity = true;
+		_currentlyLookingMovableRb.drag = 1;
+		_currentlyLookingMovableRb.constraints = RigidbodyConstraints.None;
 
-		_currentlyLookingObjectRb.transform.parent = null;
+		_currentlyLookingMovableRb.transform.parent = null;
 	}
 
 	private void StartRaycast()
@@ -111,7 +136,7 @@ public class ClickHoldAndRotateController : MonoBehaviour
 		
 		if (Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out RaycastHit hitInfo, reachDistance, _movableLayer))
 		{
-			if (_currentlyLookingObjectTrans == hitInfo.transform)
+			if (_currentlyLookingMovableTrans == hitInfo.transform)
 			{
 				return;
 			}
@@ -136,8 +161,9 @@ public class ClickHoldAndRotateController : MonoBehaviour
 			}
 
 			_lastHighligtedObjectInstanceId = instanceId;
-			_currentlyLookingObjectTrans = hitInfo.transform;
-			_currentlyLookingObjectRb = _currentlyLookingObjectTrans.GetComponent<Rigidbody>();
+			_currentlyLookingMovableTrans = hitInfo.transform;
+			_currentlyLookingMovableRb = _currentlyLookingMovableTrans.GetComponent<Rigidbody>();
+			_currentlyLookingMovable = _currentlyLookingMovableTrans.GetComponent<MovableItemBase>();
 		}
 		else
 		{
@@ -145,7 +171,9 @@ public class ClickHoldAndRotateController : MonoBehaviour
 			{
 				_cachedOutlineComponents[_lastHighligtedObjectInstanceId].enabled = false;
 			}
-			_currentlyLookingObjectTrans = null;
+			_currentlyLookingMovableTrans = null;
+			_currentlyLookingMovableRb = null;
+			_currentlyLookingMovable = null;
 		}
 	}
 }

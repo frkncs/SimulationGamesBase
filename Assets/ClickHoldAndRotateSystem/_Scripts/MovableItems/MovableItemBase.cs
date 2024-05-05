@@ -5,6 +5,7 @@ public abstract class MovableItemBase : MonoBehaviour
 	#region Variables
 
 	// Public Variables
+	[HideInInspector] public int RotationValue; // Rotation value in the Y axis
 
 	// Private Variables
 	private Outline _outline;
