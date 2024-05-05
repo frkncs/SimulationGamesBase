@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class MovableItemBase : MonoBehaviour
@@ -5,13 +6,14 @@ public abstract class MovableItemBase : MonoBehaviour
 	#region Variables
 
 	// Public Variables
+	[SerializeField] public float ThrowableForce = 40; // Force amount that will be applied to this movable object when player is throw this object
 	[HideInInspector] public int RotationValue; // Rotation value in the Y axis
 
 	// Private Variables
 	private Outline _outline;
-
-	#endregion
 	
+	#endregion
+
 	protected void Awake()
 	{
 		gameObject.layer = LayerMask.NameToLayer("Movable");
@@ -22,5 +24,10 @@ public abstract class MovableItemBase : MonoBehaviour
 		_outline.OutlineWidth = 12f;
 
 		_outline.enabled = false;
+	}
+	
+	public void SetOutlineVisibility(bool visibility)
+	{
+		_outline.enabled = visibility;
 	}
 }

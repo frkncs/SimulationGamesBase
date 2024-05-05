@@ -16,13 +16,15 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	[SerializeField] private float yOffsetForHoldObject = 2f;
 	[SerializeField] private float reachDistance = 4f;
 	[SerializeField] private float pickUpForce = 100f;
+	
 	private Camera _mainCam;
 	private LayerMask _movableLayer;
-
-	private Dictionary<int, Outline> _cachedOutlineComponents; //instanceId, outlineComponent
+	private MovableItemBase _lastLookedMovable;
 	private MovableItemBase _currentlyLookingMovable;
 	private Transform _currentlyLookingMovableTrans;
 	private Rigidbody _currentlyLookingMovableRb;
+	private Tween _rotateObjectTween;
+	
 	private int _lastHighligtedObjectInstanceId = -1;
 	private bool _isHoldingObject;
 
@@ -32,7 +34,6 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		_movableLayer = LayerMask.GetMask("Movable");
 		_mainCam = Camera.main;
-		_cachedOutlineComponents = new();
 	}
 
 	private void Update()
@@ -58,12 +59,10 @@ public class ClickHoldAndRotateController : MonoBehaviour
 			}
 		}
 	}
-
-	private Tween _rotateObjectTween;
 	
 	private void RotateMovable()
 	{
-		if (Input.GetKeyDown(KeyCode.R))
+		if (Input.GetKeyDown(KeyCode.R) && _currentlyLookingMovable != null)
 		{
 			if (_rotateObjectTween != null)
 			{
@@ -82,7 +81,6 @@ public class ClickHoldAndRotateController : MonoBehaviour
 			_rotateObjectTween = _currentlyLookingMovableTrans.DORotate(new Vector3(0, _currentlyLookingMovable.RotationValue, 0), 0.15f);
 		}
 	}
-
 	private void FixedUpdate()
 	{
 		if (_currentlyLookingMovableTrans != null)
@@ -123,8 +121,6 @@ public class ClickHoldAndRotateController : MonoBehaviour
 		_currentlyLookingMovableRb.useGravity = true;
 		_currentlyLookingMovableRb.drag = 1;
 		_currentlyLookingMovableRb.constraints = RigidbodyConstraints.None;
-
-		_currentlyLookingMovableRb.transform.parent = null;
 	}
 
 	private void StartRaycast()
@@ -145,31 +141,22 @@ public class ClickHoldAndRotateController : MonoBehaviour
 
 			if (_lastHighligtedObjectInstanceId != -1 && instanceId != _lastHighligtedObjectInstanceId)
 			{
-				_cachedOutlineComponents[_lastHighligtedObjectInstanceId].enabled = false;
-			}
-
-			if (_cachedOutlineComponents.TryGetValue(instanceId, out Outline outline))
-			{
-				outline.enabled = true;
-			}
-			else
-			{
-				var outlineComp = hitInfo.transform.GetComponent<Outline>();
-				outlineComp.enabled = true;
-
-				_cachedOutlineComponents.Add(instanceId, outlineComp);
+				_lastLookedMovable.SetOutlineVisibility(false);
 			}
 
 			_lastHighligtedObjectInstanceId = instanceId;
 			_currentlyLookingMovableTrans = hitInfo.transform;
-			_currentlyLookingMovableRb = _currentlyLookingMovableTrans.GetComponent<Rigidbody>();
 			_currentlyLookingMovable = _currentlyLookingMovableTrans.GetComponent<MovableItemBase>();
+			_currentlyLookingMovableRb = _currentlyLookingMovableTrans.GetComponent<Rigidbody>();
+			_lastLookedMovable = _currentlyLookingMovable;
+
+			_currentlyLookingMovable.SetOutlineVisibility(true);
 		}
 		else
 		{
-			if (_lastHighligtedObjectInstanceId != -1)
+			if (_lastLookedMovable != null)
 			{
-				_cachedOutlineComponents[_lastHighligtedObjectInstanceId].enabled = false;
+				_lastLookedMovable.SetOutlineVisibility(false);
 			}
 			_currentlyLookingMovableTrans = null;
 			_currentlyLookingMovableRb = null;

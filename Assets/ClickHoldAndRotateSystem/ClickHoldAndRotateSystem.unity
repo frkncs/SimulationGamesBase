@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &41319529
 Rigidbody:
@@ -303,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &72516935
 Rigidbody:
@@ -450,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &88567935
 Rigidbody:
@@ -597,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &424068445
 Rigidbody:
@@ -744,6 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &427051624
 Rigidbody:
@@ -891,6 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &537162909
 Rigidbody:
@@ -1038,6 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &578535004
 Rigidbody:
@@ -1298,6 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!1 &878944758
 GameObject:
@@ -1332,6 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &878944760
 Rigidbody:
@@ -1479,6 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &902923024
 Rigidbody:
@@ -1626,6 +1636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &916929739
 Rigidbody:
@@ -1773,6 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &927630665
 Rigidbody:
@@ -1921,6 +1933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &948221932
 Rigidbody:
@@ -2068,6 +2081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1296210966
 Rigidbody:
@@ -2320,6 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1325844337
 Rigidbody:
@@ -2467,6 +2482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1421350759
 Rigidbody:
@@ -2614,6 +2630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1558799885
 Rigidbody:
@@ -2761,6 +2778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1601050988
 Rigidbody:
@@ -2908,6 +2926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1685211386
 Rigidbody:
@@ -3055,6 +3074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1741768759
 Rigidbody:
@@ -3202,6 +3222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &1763158265
 Rigidbody:
@@ -3417,6 +3438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &2066936275
 Rigidbody:
@@ -3564,6 +3586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16a850dc8759248ade9139c4e66555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowableForce: 0
   RotationValue: 0
 --- !u!54 &2105580319
 Rigidbody:
