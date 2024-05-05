@@ -11,7 +11,6 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	// Public Variables
 
 	// Private Variables
-	//[SerializeField] private Transform holdArea;
 	[SerializeField] private float zOffsetForHoldObject = 6f;
 	[SerializeField] private float yOffsetForHoldObject = 2f;
 	[SerializeField] private float reachDistance = 4f;
@@ -49,11 +48,11 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		if (_currentlyLookingMovableTrans != null)
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetKeyDown(KeyCode.E) && !_isHoldingObject)
 			{
 				PickupMovable();
 			}
-			else if (Input.GetMouseButtonUp(0))
+			else if (Input.GetKeyDown(KeyCode.E) && _isHoldingObject)
 			{
 				DropMovable();
 			}
@@ -85,10 +84,7 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		if (_currentlyLookingMovableTrans != null)
 		{
-			if (Input.GetMouseButton(0))
-			{
-				MoveMovable();
-			}
+			MoveMovable();
 		}
 	}
 	
@@ -96,7 +92,7 @@ public class ClickHoldAndRotateController : MonoBehaviour
 	{
 		Vector3 forwardHoldObjectPos = transform.position + (_mainCam.transform.forward * zOffsetForHoldObject) + (Vector3.up * yOffsetForHoldObject);
 		
-		if ((forwardHoldObjectPos - _currentlyLookingMovableTrans.position).sqrMagnitude >= .01f)
+		if (_isHoldingObject && (forwardHoldObjectPos - _currentlyLookingMovableTrans.position).sqrMagnitude >= .01f)
 		{
 			Vector3 moveDir = forwardHoldObjectPos - _currentlyLookingMovableTrans.position;
 			_currentlyLookingMovableRb.AddForce(moveDir * pickUpForce);
